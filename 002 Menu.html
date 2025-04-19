@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Меню</title>
+  <style>
+    /* Жалпы стильдер */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+    }
+
+    /* Жоғарғы категория батырмалары */
+    .category-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      overflow-x: auto;
+      gap: 10px;
+      background-color: #fff;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+      .category-menu::-webkit-scrollbar {
+      display: none; /* Скроллбарды жасыру */
+    }
+   
+    .category-menu button {
+      background-color: #ddd;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.3s;
+      flex-shrink: 0;
+    }
+
+    .category-menu button.active {
+      background-color: #ff9f00;
+      color: #fff;
+    }
+
+    /* Контент */
+    .menu-container {
+      width: 90%;
+      max-width: 600px;
+      margin: 80px auto 20px;
+    }
+
+    /* Бөлімдер */
+    .section {
+      padding: 20px 0;
+    }
+
+    /* Әр сусын карточкасы */
+    .item {
+      display: flex;
+      align-items: center;
+      background-color: #fff;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    .item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    /* Сурет */
+    .item img {
+      width: 70px;
+      height: 70px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    /* Аты мен бағасы */
+    .item-info {
+      flex: 1;
+      margin-left: 10px;
+      text-align: left;
+    }
+    .item-info h2 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+    }
+    .item-info p {
+      margin: 5px 0 0;
+      color: #555;
+      font-size: 14px;
+    }
+
+    /* Мобильді құрылғыларға бейімделу */
+    @media (max-width: 480px) {
+      .category-menu {
+        flex-direction: column;
+        align-items: center;
+          justify-content: flex-start;
+      }
+      .category-menu button {
+        width: 90%;
+        text-align: center;
+      }
+      .item {
+        padding: 8px;
+      }
+      .item-info h2 {
+        font-size: 14px;
+      }
+      .item-info p {
+        font-size: 12px;
+      }
+    }
+
+    @media screen and (orientation: landscape), screen and (orientation: portrait) {
+    .category-menu {
+      flex-direction: row !important;
+      align-items: flex-start !important;
+      justify-content: flex-start !important;
+    }
+
+    .category-menu button {
+      width: auto !important;
+      text-align: center;
+    }
+  }
+  </style>
+</head>
+<body>
+
+  <!-- Жоғарғы бекітілген категориялар -->
+  <div class="category-menu">
+    <button class="category-btn" onclick="scrollToSection('coffee')">Кофе</button>
+    <button class="category-btn" onclick="scrollToSection('Chai')">Чай</button>
+    <button class="category-btn" onclick="scrollToSection('tapioki')">Тапиоки</button>
+    <button class="category-btn" onclick="scrollToSection('ice')">Ice Coffee</button>
+    <button class="category-btn" onclick="scrollToSection('limonady')">Лимонады</button>
+    <button class="category-btn" onclick="scrollToSection('milkshakes')">Молочные коктейли</button>
+    <button class="category-btn" onclick="scrollToSection('smuzi')">Смузи</button>
+    <button class="category-btn" onclick="scrollToSection('fresh')">Фреш</button>
+    <button class="category-btn" onclick="scrollToSection('ictea')">Ice Tea</button>
+    <button class="category-btn" onclick="scrollToSection('bubbletea')">Bubble tea</button>
+    <button class="category-btn" onclick="scrollToSection('boul')">Поке-боул</button>
+    <button class="category-btn" onclick="scrollToSection('tzav')">Таңғы ас</button>
+    <button class="category-btn" onclick="scrollToSection('slzavtrak')">СЛАДКИЕ ЗАВТРАКИ</button>
+    <button class="category-btn" onclick="scrollToSection('soverizav')">Собери свой завтрак</button>
+    <button class="category-btn" onclick="scrollToSection('salat')">САЛАТЫ</button>
+    <button class="category-btn" onclick="scrollToSection('sup')">СУПЫ</button>
+    <button class="category-btn" onclick="scrollToSection('gorbludo')">ГОРЯЧИЕБЛЮДА</button>
+    <button class="category-btn" onclick="scrollToSection('pasta')">ПАСТА</button>
+    <button class="category-btn" onclick="scrollToSection('steyk')">СТЕЙКИ</button>
+    <button class="category-btn" onclick="scrollToSection('fasfud')">ФАСТФУД</button>
+    <button class="category-btn" onclick="scrollToSection('napitki')">Напитки</button>
+    <button class="category-btn" onclick="scrollToSection('deserti')">ДЕСЕРТЫ</button>
+  </div>
+
+<!-- Мәзір -->
+  <div class="menu-container">
+    <!-- Кофе -->
+    <div class="section" id="coffee">
+        <h2>Кофе</h2>
+    <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPSqwOv3MsB5nE84m1zofwp6Y6MICKsrOTNA&s" alt="Эспрессо">
+        <div class="item-info">
+            <h2>Эспрессо</h2>
+            <p>790 тг ............. 60 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFJ7w7d_ZkZHAR9Y89iKyKRZCvVrr0Ji_2rw&s" alt="Американо">
+        <div class="item-info">
+            <h2>Американо</h2>
+            <p>790 тг ............. 200 мл <br> 890 тг ............. 300 мл <br> 1 190 тг ............. 400 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2ydcmDlU6DeTsFE9Ok87kAp5M_q0yiW_Xnw&s" alt="Фр Кортадо">
+        <div class="item-info">
+            <h2>Кортадо</h2>
+            <p>1 190 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://acciostore.kz/images/flat-white.webp" alt="Флэт уайт">
+        <div class="item-info">
+            <h2>Флэт уайт</h2>
+            <p>1 190 тг ............. 250 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://www.nescafe.kz/sites/default/files/2024-09/GettyImages-1434303312-6.jpg" alt="Капучино">
+        <div class="item-info">
+            <h2>Капучино</h2>
+            <p>890 тг ............. 200 мл <br> 1 190 тг ............. 300 мл <br> 1 290 тг ............. 400 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://franko.kz/upload/iblock/7ff/dll1rxlb5fr7auv1741faa51g2kbrtlv.jpg" alt="Моккачино">
+        <div class="item-info">
+            <h2>Моккачино</h2>
+            <p>1 190 тг ............. 300 мл <br> 1 390 тг ............. 400 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://cdn.7days.ru/pic/430/938478/549403/90.jpg" alt="Латте">
+        <div class="item-info">
+            <h2>Латте</h2>
+            <p>1 190 тг ............. 300 мл <br> 1 390 тг ............. 400 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://coffeegravity.ru/wp-content/uploads/2020/12/%D0%A0%D0%B0%D1%84.jpg" alt="Раф">
+        <div class="item-info">
+            <h2>Раф</h2>
+            <p>1 490 тг ............. 300 мл <br> 1 690 тг ............. 400 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://grandkulinar.ru/uploads/posts/2011-12/1324990004_affogato.jpg" alt="Аффогато">
+        <div class="item-info">
+            <h2>Аффогато</h2>
+            <p>1 490 тг ............. 150 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlrePKnFXb2J2Sz6r96Fik0i5Fcq39EQ6QGIbVU_0ZBN_GhbkFIutAbgIH1gxSjdoq0nY&usqp=CAU" alt="Батч">
+        <div class="item-info">
+            <h2>Батч</h2>
+            <p>890 тг ............. 300 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://gemini.ua/wp-content/uploads/2024/06/kava-batch-bryu-600x750.jpg" alt="Воронка">
+        <div class="item-info">
+            <h2>Воронка</h2>
+            <p>1 990 тг ............. 300 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+     <div class="item">
+        <img src="https://101tea.ru/upload/ammina.optimizer/jpg-webp/q70/upload/iblock/593/5939e1b5b44e66d6c1a90d5e325a46fb.webp" alt="Матча шайы">
+        <div class="item-info">
+            <h2>Матча шайы</h2>
+            <p>1 290 тг ............. 300 мл <br> 1 390 тг ............. 400 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3juw71ywHiyUMSlGAu-pBI4tQ2ujMXEp3rQ&s" alt="Какао">
+        <div class="item-info">
+            <h2>Какао</h2>
+            <p>890 тг ............. 200 мл <br> 990 тг ............. 300 мл <br> 1 190 тг ............. 400 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://static.tildacdn.com/tild3064-6138-4663-b264-353032353332/elena-leya-NtmNhrdfs.jpg" alt="Горячий шоколад">
+        <div class="item-info">
+            <h2>Горячий шоколад</h2>
+            <p>890 тг ............. 200 мл <br> 990 тг ............. 300 мл <br> 1 190 тг ............. 400 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+</div>
+ <!-- Чай -->
+    <div class="section" id="Chai">
+        <h2>Чай</h2>
+    <div class="item">
+        <img src="https://cdn-kz3.foodpicasso.com/assets/2023/11/02/2c127281f956ea0869f5b0d98d4a6f86---jpg_1000x_103c0_convert.jpg" alt="Марокканский чай">
+        <div class="item-info">
+            <h2>Марокканский чай</h2>
+            <p>1 190 тг ............. 400 мл <br> 2 490 тг ............. 900 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://i.ytimg.com/vi/CGf69RItpBY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLD9MDS3F3X4R7IhMrW_UDLsQhy9aQ" alt="Жидекті шай">
+        <div class="item-info">
+            <h2>Жидекті шай</h2>
+            <p>1 190 тг ............. 400 мл <br> 2 490 тг ............. 900 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://static.ernur.kz/article/60815ca26268c.jpg" alt="Зімбір шайы">
+        <div class="item-info">
+            <h2>Зімбір шайы</h2>
+            <p>1 190 тг ............. 400 мл <br> 2 490 тг ............. 900 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://i.ytimg.com/vi/rsoNs-wl_r4/maxresdefault.jpg" alt="Ташкент шайы">
+        <div class="item-info">
+            <h2>Ташкент шайы</h2>
+            <p>1 190 тг ............. 400 мл <br> 2 490 тг ............. 900 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxCYMlM1BOfefkAjFwcrdoVVlcE6ZzYKkUmg&s" alt="Шырғанақ шайы">
+        <div class="item-info">
+            <h2>Шырғанақ шайы</h2>
+            <p>1 190 тг ............. 400 мл <br> 2 490 тг ............. 900 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1a3kr1lpcw3dxBO5YmLdNnGxIX4hbYkEs8I9c-TgVls3fsusuDwFzF3dHcdF-53DFfjE&usqp=CAU" alt="Масала шайы">
+        <div class="item-info">
+            <h2>Масала шайы</h2>
+            <p>1 190 тг ............. 400 мл <br> 2 490 тг ............. 900 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+</div>
+    <!-- Тапиоки -->
+    <div class="section" id="tapioki">
+        <h2>Тапиоки</h2>
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/1472406/2c353869ccfd8fa23bf41061c5b2af26/M_height" alt="Черничный улун">
+        <div class="item-info">
+            <h2>Черничный улун</h2>
+            <p>
+                1 790 тг ............. 450 ml <br>
+                3 000 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/3541746/88d69e267c964363a3a15a47cc519873/M_height" alt="Орео">
+        <div class="item-info">
+            <h2>Орео</h2>
+            <p>
+                1 790 тг ............. 450 ml <br>
+                3 000 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/1447609/0b4ea81cb1e64b2eb68fdd491e3379dc/M_height" alt="Клубника-роза">
+        <div class="item-info">
+            <h2>Клубника-роза</h2>
+            <p>
+                1 790 тг ............. 450 ml <br>
+                3 000 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/3784951/c54a79abcf8b44acb5369e3bc0013e0e/M_height" alt="Банан-соленая карамель">
+        <div class="item-info">
+            <h2>Банан-соленая карамель</h2>
+            <p>
+                1 790 тг ............. 450 ml <br>
+                3 000 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+</div> 
+      <!-- Ice Coffee  -->
+    <div class="section" id="ice">
+        <h2>Ice Coffee </h2>
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/15382203/b5ce8c08cf9997b2a5620998250d11e0/M_height" alt="Ice капучино">
+        <div class="item-info">
+            <h2>Ice капучино</h2>
+            <p>
+                1 390 тг ............. 450 ml <br>
+                2 500 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14904645/b7981f95ce9cc331cce339e958d0c87b/M_height" alt="Ice американо">
+        <div class="item-info">
+            <h2>Ice американо</h2>
+            <p>
+                1 490 тг ............. 450 ml <br>
+                2 700 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14921544/fdbab2faf4fcc111371742b1327029f7/M_height" alt="Алматино">
+        <div class="item-info">
+            <h2>Алматино</h2>
+            <p>
+                2 190 тг ............. 450 ml <br>
+                3 800 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/3191933/456db4b18e4804d92e4c0ad722bb862a/M_height" alt="Эспрессо тоник">
+        <div class="item-info">
+            <h2>Эспрессо тоник</h2>
+            <p>
+                1 890 тг ............. 450 ml <br>
+                3 300 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/15437042/4e19904b49f58b11eceddd98d506ffb8/M_height" alt="Бамбл">
+        <div class="item-info">
+            <h2>Бамбл</h2>
+            <p>
+                2 290 тг ............. 450 ml <br>
+                4 000 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+</div>
+    <!-- Лимонадтар -->
+    <div class="section" id="limonady">
+    	<h2>Лимонады</h2>
+     <div class="item">
+      <img src="https://imageproxy.wolt.com/menu/menu-images/shared/894e8f46-eec8-11ee-9f2c-927b84780683_img_4842.jpg" alt="Манго-апельсин">
+      <div class="item-info">
+        <h2>Манго-Маракуйя</h2>
+        <p>
+          1 200 тг ............. 450 ml <br>
+          2 300 тг ............. 1 L
+        </p>
+      </div>
+      <button class="add-button">+</button>
+    </div>
+ 
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/3508859/c1ea659444765758a24858d1ab71a26e/M_height" alt="Барбарис-ананас">
+        <div class="item-info">
+            <h2>Барбарис-ананас</h2>
+            <p>
+                1 290 тг ............. 450 ml <br>
+                2 290 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/1472406/56cdfb6102f70691db58495042e68694/M_height" alt="Киви-лайм">
+        <div class="item-info">
+            <h2>Киви-лайм</h2>
+            <p>
+                1 290 тг ............. 450 ml <br>
+                2 290 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14904645/2aad339e4d2b1faafff9e3d9b48ebb7b/M_height" alt="Жидек микс">
+        <div class="item-info">
+            <h2>Жидек микс</h2>
+            <p>
+                1 290 тг ............. 450 ml <br>
+                2 290 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/1397595/16638ded5308f9ec2fc51adb0c81eb5b/M_height" alt="Мохито">
+        <div class="item-info">
+            <h2>Мохито</h2>
+            <p>
+                1 290 тг ............. 450 ml <br>
+                2 290 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+</div>
+    <!-- Молочные коктейли -->
+    <div class="section" id="milkshakes">
+    	 <h2>Молочные коктейли</h2>
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/1463280/27c1bbb28064e1e7572aaf20e8388e21/M_height" alt="Вафл-попкорн">
+        <div class="item-info">
+            <h2>Вафл-попкорн</h2>
+            <p>
+                1 990 тг ............. 450 ml <br>
+                3 500 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/13058477/89271c8822d00839219d02b5adf6b52e/M_height" alt="Банан-коктейль">
+        <div class="item-info">
+            <h2>Банан-коктейль</h2>
+            <p>
+                1 990 тг ............. 450 ml <br>
+                3 500 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/3508859/a30e27f1c6091f2fd8a4bc241eb059ab/M_height" alt="Клубничный коктейль">
+        <div class="item-info">
+            <h2>Клубничный коктейль</h2>
+            <p>
+                1 990 тг ............. 450 ml <br>
+                3 500 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/3793239/033f29556f08ee7bc1b518818a2da53d/M_height" alt="Шоколадный коктейль">
+        <div class="item-info">
+            <h2>Шоколадный коктейль</h2>
+            <p>
+                1 990 тг ............. 450 ml <br>
+                3 500 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/3528285/bce5e7738a4a2ca761de25636bd29b28/M_height" alt="Ванильный коктейль">
+        <div class="item-info">
+            <h2>Ванильный коктейль</h2>
+            <p>
+                1 990 тг ............. 450 ml <br>
+                3 500 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+</div>
+    <!-- Смузи  -->
+    <div class="section" id="smuzi">
+    	 <h2>Смузи</h2>
+    <div class="item">
+        <img src="https://imageproxy.wolt.com/menu/menu-images/shared/bf6aa768-eec8-11ee-a42f-62d6558e10fd_img_4881.jpg" alt="Авокадо">
+        <div class="item-info">
+            <h2>Авокадо</h2>
+            <p>
+                2 790 тг ............. 450 ml <br>
+                4 500 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/3809330/2f7133ce4e5c4ba322bf0f7292e51431/M_height" alt="Банан-шие">
+        <div class="item-info">
+            <h2>Банан-шие</h2>
+            <p>
+                2 490 тг ............. 450 ml <br>
+                4 000 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/3805444/2f1b0639f60fc5a200a3d98c337625b9/M_height" alt="Каракат-банан">
+        <div class="item-info">
+            <h2>Каракат-банан</h2>
+            <p>
+                2 490 тг ............. 450 ml <br>
+                4 000 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/1397595/5a1a7c41e1d0ccbd581ec9231fe801ac/M_height" alt="Жеміс микс">
+        <div class="item-info">
+            <h2>Жеміс микс</h2>
+            <p>
+                2 490 тг ............. 450 ml <br>
+                4 000 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/3191933/a91d7282f1ef96919bfafe33f029949a/M_height" alt="Киви-банан">
+        <div class="item-info">
+            <h2>Киви-банан</h2>
+            <p>
+                2 490 тг ............. 450 ml <br>
+                4 000 тг ............. 1 L
+            </p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+</div>
+         <!-- Фреш  -->
+    <div class="section" id="fresh">
+         <h2>Фреш</h2>
+          <div class="item">
+        <img src="https://jez.menzo.kz/wp-content/uploads/2024/05/IMG_7109.jpeg" alt="Апельсин">
+        <div class="item-info">
+            <h2>Апельсин</h2>
+            <p>2 290 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://test.golpas.cafe/uploads/2016/03/image-15-03-16-03-30(2).jpeg" alt="Микс (Апельсин, Алма)">
+        <div class="item-info">
+            <h2>Микс (Апельсин, Алма)</h2>
+            <p>2 290 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://cdn-kz3.foodpicasso.com/assets/2022/09/28/b82a17a2e91e42c9b54c2100791025cf---jpg_528x260:whitepadding20_4715c_convert.jpg" alt="Алма">
+        <div class="item-info">
+            <h2>Алма</h2>
+            <p>2 290 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://nonna.com.ua/image/catalog/desertyfreshismuzi/freshjablochnyj.jpg" alt="Алма/Сәбіз">
+        <div class="item-info">
+            <h2>Алма/Сәбіз</h2>
+            <p>2 290 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+</div>
+ <!--  Ice Tea -->
+    <div class="section" id="ictea">
+         <h2>Ice Tea</h2>
+      <div class="item">
+        <img src="https://cdn-kz3.foodpicasso.com/assets/2021/08/26/f8abce5d26fa8ee061333f3ddce7c6d1---jpeg_1000x_103c0_convert.jpeg" alt="Апельсин">
+        <div class="item-info">
+            <h2>Апельсин</h2>
+            <p>1 190 тг ............. 300 мл <br> 1 990 тг ............. 400 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ4kcP2XBCLRho4AeUEBTcBUBWj1CM5NJf8Re3BkMhd0-kEg5qM-Re3wwSDVCJnQ1Qp_8&usqp=CAU" alt="Ягодный">
+        <div class="item-info">
+            <h2>Ягодный</h2>
+            <p>1 290 тг ............. 300 мл <br> 2 290 тг ............. 400 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIzOK6bjlsIhsaXVqQRc91nGn4E_rgSUJg3w&s" alt="Манго-лайм">
+        <div class="item-info">
+            <h2>Манго-лайм</h2>
+            <p>1 190 тг ............. 300 мл <br> 1 990 тг ............. 400 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+</div>
+<!--  Bubble tea  -->
+    <div class="section" id="bubbletea">
+         <h2>Bubble tea </h2>
+        <div class="item">
+        <img src="https://coopgastrobar.ru/upload/webp/iblock/218/21859a5eacb7b22c0e3900c479e73f50.webp" alt="Апельсин">
+        <div class="item-info">
+            <h2>Апельсин</h2>
+            <p>1 190 тг ............. 300 мл <br> 1 990 тг ............. 400 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://coopgastrobar.ru/upload/webp/iblock/9ea/9eadb6c909b4c14ca252a66377a63ede.webp" alt="Ягодный">
+        <div class="item-info">
+            <h2>Ягодный</h2>
+            <p>1 290 тг ............. 300 мл <br> 2 290 тг ............. 400 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://coopgastrobar.ru/upload/webp/resize_cache/fe3/400_400_2/fe3fb12b0cafef791ba447c09f2b47d8.webp" alt="Манго-лайм">
+        <div class="item-info">
+            <h2>Манго-лайм</h2>
+            <p>1 190 тг ............. 300 мл <br> 1 990 тг ............. 400 мл</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+</div>
+      <!-- БОУЛЫ   -->
+      <div class="section" id="boul">
+    <h2>Поке-боул</h2>
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/3806466/2c333e9d08c647db9f868d470d641d6c/orig" alt="Тауықпен поке-боул">
+        <div class="item-info">
+            <h2>Поке-боул с курицей</h2>
+            <p>2 990 тг</p>
+            <p>Блюдо гавайской кухни из подушки риса, филе курицы, ломтиков ананаса, бобов эдамаме, помидоров черри, огурцов заправленное ореховым соусом</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/3806466/2c333e9d08c647db9f868d470d641d6c/orig" alt="Ақсеркемен поке-боул">
+        <div class="item-info">
+            <h2>Поке-боул с семгой</h2>
+            <p>3 590 тг</p>
+            <p>Блюдо гавайской кухни из подушки риса, лосося, ломтиков ананаса, бобов эдамаме, помидоров черри, огурцов, заправленным ореховым соусом</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/1397595/c0f1b7622ae0439984693dfdba95ce5b/orig" alt="Асшаян қосылған поке-боул">
+        <div class="item-info">
+            <h2>Поке-боул с креветками</h2>
+            <p>3 590 тг</p>
+            <p>Блюдо гавайской кухни из подушки риса, креветок, ломтиков ананаса, бобов эдамаме, помидоров черри, огурцов заправленное ореховым соусом</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+</div>
+      <!-- ЗАВТРАКИ  -->
+      <div class="section" id="tzav">
+    <h2>Таңғы ас</h2>
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/3508859/5d6c593c738540ccaeed9aba29a80dc6/orig" alt="Тойымды таңғы ас">
+        <div class="item-info">
+            <h2>Сытный завтрак</h2>
+            <p>3 990 тг</p>
+            <p>Аппетитный и сытный завтрак на основе свежеиспеченной вафли, дополненной нежным творожным сыром, творогом, листьями салата, авокадо, сёмгой, яйцами пашот и посыпанной сверху фисташками.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/3528285/619df7cf923742aaaf7f8894d4c4ff57/orig" alt="Ауыл таңғы асы">
+        <div class="item-info">
+            <h2>Деревенский завтрак</h2>
+            <p>3 290 тг</p>
+            <p>Очень вкусный и сытный завтрак: пикантные охотничьи колбаски с молодым картофелем, хрустящими корнишонами и жареными шампиньонами.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://foodfriends.ru/assets/files/images/2022/10/crop/large.0b7799f4.1617165400_30_p_turetskii_zavtrak_krasivo_35_1.jpg" alt="Түрік таңғы асы">
+        <div class="item-info">
+            <h2>Турецкий завтрак</h2>
+            <p>3 690 тг</p>
+            <p>Восхитительный турецкий завтрак: яичница и симит, буреки, мёд, домашняя сметана, маслины, оливки и творог.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://i0.wp.com/www.vsyasol.com/wp-content/uploads/2011/04/IMG_8397.jpg?fit=1200%2C800&ssl=1" alt="Бенни ысталған ақсеркесі">
+        <div class="item-info">
+            <h2>Копченый лосось Бенни</h2>
+            <p>2 790 тг</p>
+            <p>Сытный завтрак с гуаккамоле, соусом тартин и семгой холодного копчения, сверху пышный и воздушный соус голландез.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEn-tR-WObGgAPigsOGCZdgtFgsA4A8PK8-A&s" alt="Гурман круассаны">
+        <div class="item-info">
+            <h2>Круассан гурман</h2>
+            <p>2 790 тг</p>
+            <p>Свежий круассан с добавлением семги, авокадо, яйца пашот и творожного сыра.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/12773219/e4ebca60adc5a992b02869c926a8fb90/orig" alt="Фитнес таңғы ас">
+        <div class="item-info">
+            <h2>Фитнес завтрак</h2>
+            <p>2 990 тг</p>
+            <p>Очень полезный и вкусный завтрак с добавлением куриного филе, творожного сыра, гуакамоле и микс салата.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+     <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/15437042/98163f69f221ae2c30565bfa36c92dd5/orig" alt="Ағылшын таңғы асы">
+        <div class="item-info">
+            <h2>Английский завтрак</h2>
+            <p>3 290 тг</p>
+            <p>Традиционный завтрак из двух яиц глазуньи, нарезанных колбасок, красной фасоли и микса свежей зелени.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+     <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/1365461/93c7fbb1c76a4a88be2331bacd251ae3/orig" alt="Ақсерке қосылған скрэмбл">
+        <div class="item-info">
+            <h2>Скрэмбл лосось</h2>
+            <p>3 290 тг</p>
+            <p>Яичница - болтунья на сливочном масле с добавлением кусочков малосольного лосося с освежающим микс салатом заправленным цитрусовым соусом.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+      <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14790567/259835d995d11993ce5e5a8900baaf2a/orig" alt="Бавар таңғы асы">
+        <div class="item-info">
+            <h2>Баварский завтрак</h2>
+            <p>3 290 тг</p>
+            <p>Глазунья из двух яиц с обжаренными охотничьими колбасками с картофельными дольками, сочным беконом из говядины и хрустящими корнишонами, свежими томатами черри и миксом салата. Подается с хрустящими тостами.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/1365461/93c7fbb1c76a4a88be2331bacd251ae3/orig" alt="“Скрэмбл” тосты">
+        <div class="item-info">
+            <h2>Тост “Скрэмбл”</h2>
+            <p>1 790 тг</p>
+            <p>Сытный завтрак с добавлением свежего тартина, творожного сыра и яйца скрембл.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+     <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/12773219/47b10791782857e6765548976c9249db/orig" alt="Классикалық омлет">
+        <div class="item-info">
+            <h2>Классический омлет</h2>
+            <p>1 990 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/3191933/ac3867e8a25e46378469c972d516365b/orig" alt="Түйетауық қосылған скрэмбл">
+        <div class="item-info">
+            <h2>Скрэмбл индейка</h2>
+            <p>2 590 тг</p>
+            <p>Яичница - болтунья на сливочном масле с добавлением кусочков индейки с освежающим микс салатом заправленным цитрусовым соусом.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/3806315/ea788faf34a340429ef2e12431be3c06/orig" alt="Шпинат қосылған глазунья">
+        <div class="item-info">
+            <h2>Глазунья со шпинатом</h2>
+            <p>2 590 тг</p>
+            <p>Низкокалорийный завтрак глазунья со шпинатом, брокколи, и со свежим микс салатом.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/3508859/5d6c593c738540ccaeed9aba29a80dc6/orig" alt="Кішігірім тойымды таңғы ас">
+        <div class="item-info">
+            <h2>Мини сытный завтрак</h2>
+            <p>2 790 тг</p>
+            <p>Аппетитный и сытный завтрак на основе свежеиспеченной вафли, дополненной нежным творожным сыром, творогом, листьями салата, авокадо, сёмгой, яйцами пашот и посыпанной сверху фисташками.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/1472406/432ed5c7a2044cf5909636c2b33199be/orig" alt="Глазунья жұмыртқасынан таңғы ас">
+        <div class="item-info">
+            <h2>Завтрак яичница глазунья</h2>
+            <p>1 990 тг</p>
+            <p>Классический завтрак из трёх яиц глазуньи со свежим микс салатом и хрустящего тоста.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/15437042/fa0705ef770234cf11fe017875a86e65/orig" alt="Авокадо қосылған омлет">
+        <div class="item-info">
+            <h2>Омлет с авокадо</h2>
+            <p>2 990 тг</p>
+            <p>Пышный и воздушный завтрак из трех яиц, наполненный авокадо и творожным сыром, помидорами черри, украшенный миксом салата с фисташковой крошкой.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/15437042/ee8253c81ee7e36e54e420da927d7961/orig" alt="Таңқурай сорбетімен сұлы ботқасы">
+        <div class="item-info">
+            <h2>Каша овсяная с сорбетом из малины</h2>
+            <p>1 790 тг</p>
+            <p>Классическая каша из овсяной крупы на основе молока с добавлением шарика сорбета из малины и изюма.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/3528285/ce77a3ece47c4ae5a11c799bd2695d27/orig" alt="Сүзбелі құймақтар">
+        <div class="item-info">
+            <h2>Сырники</h2>
+            <p>1 990 тг</p>
+            <p>Самый творожный и тающий во рту завтрак.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14908628/acd6178e894cb0af44298e99e5376d03/orig" alt="Классикалық құймақтар">
+        <div class="item-info">
+            <h2>Блины классические</h2>
+            <p>1 290 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14908628/acd6178e894cb0af44298e99e5376d03/orig" alt="Сүзбе қосылған құймақтар">
+        <div class="item-info">
+            <h2>Блины с творогом</h2>
+            <p>1 790 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/13802765/ea7055bae8f3236c60c1b7dd33850c9f/orig" alt="Алмұрт және көкжидек қосылған күріш ботқасы">
+        <div class="item-info">
+            <h2>Каша рисовая с грушей и голубикой</h2>
+            <p>1 790 тг</p>
+            <p>Классическая каша из рисовой крупы на основе молока с добавлением тонких слайсов груши и ягод голубики.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://www.gotovim.ru/pics/sbs/kruasanbrigrush/rec.jpg" alt="Алмұрт пен ірімшік қосылған круассан">
+        <div class="item-info">
+            <h2>Круассан с грушей и сыром</h2>
+            <p>2 790 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+     <!-- СЛАДКИЕ ЗАВТРАКИ   -->
+      <div class="section" id="slzavtrak">
+    <h2>СЛАДКИЕ ЗАВТРАКИ</h2>
+    <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeb-rMyI3-nClK2rjsxdHo9TVbl9kAylZxg8t0AsJPjxOULajYvvx6iyAxoWN7CTA0zd0&usqp=CAU" alt="Бельгиялық вафли">
+        <div class="item-info">
+            <h2>Бельгийские вафли</h2>
+            <p>2 490 тг</p>
+            <p>Горячие и ароматные вафли, украшенные шариком ванильного мороженого, кусочками банана, творогом, клубники, голубики и политые бельгийским шоколадом.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/13802765/a3e489284c9266a467a1ee9da8e51204/orig" alt="Жеті қат аспанда">
+        <div class="item-info">
+            <h2>На седьмом небе</h2>
+            <p>2 990 тг</p>
+            <p>Семена чиа в домашнем йогурте, свежие сезонные фрукты и ягоды и высококачественная гранола.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+        <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQld7EAGmLpesJI6OmUM4cfzt4_Z6aycOq1-w&s" alt="Йогурт қосылған гранола">
+        <div class="item-info">
+            <h2>Гранола с йогуртом</h2>
+            <p>2 290 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/15135287/be7c20e6d11db1d71647219c98b09a8d/orig" alt="Асаи боул">
+        <div class="item-info">
+            <h2>Асаи боул</h2>
+            <p>3 290 тг</p>
+            <p>Популярный суперфуд для людей придерживающихся здорового питания. Ягоды асаи улучшают иммунитет и продлевают молодость.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/1219753/8cb50ff6e7bc47a08aedb4dddadfd383/orig" alt="Банан мен жидектер қосылған сүзбе">
+        <div class="item-info">
+            <h2>Творог с бананом и ягодами</h2>
+            <p>2 790 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+ <!-- Собери свой завтрак -->
+      <div class="section" id="soverizav">
+    <h2>Собери свой завтрак</h2>
+    <div class="section" id="Extras">
+        <h2>Қосымша</h2>
+        <ul>
+            <li>Яйцо - 150 тг</li>
+            <li>Хлеб тартин - 190 тг</li>
+            <li>Тост (белый/черный) - 190 тг</li>
+            <li>Корнишоны - 250 тг</li>
+            <li>Сливочное масло - 290 тг</li>
+            <li>Сосиски (охотничьи/молочные) - 500 тг</li>
+            <li>Творожный сыр - 300 тг</li>
+            <li>Говяжий бекон - 490 тг</li>
+            <li>Авокадо - 790 тг</li>
+            <li>Шампиньоны - 290 тг</li>
+            <li>Сыр в ассортименте - 590 тг</li>
+            <li>Турецкий симит - 490 тг</li>
+            <li>Индейка - 490 тг</li>
+            <li>Лосось - 890 тг</li>
+            <li>Джем - 290 тг</li>
+            <li>Пашот - 350 тг</li>
+            <li>Мёд - 190 тг</li>
+            <li>Сметана - 190 тг</li>
+            <li>Бурек - 190 тг</li>
+            <li>Курица отварная - 390 тг</li>
+            <li>Микс салат - 550 тг</li>
+        </ul>
+    </div>
+   <!-- САЛАТЫ -->
+      <div class="section" id="salat">
+    <h2>САЛАТЫ</h2>
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/15431188/2ca2af40c3342b67492f289e289d7500/orig" alt="Баялды мен сүзбе ірімшігі қосылған жылы салат">
+        <div class="item-info">
+            <h2>Теплый салат с баклажанами и творожным сыром</h2>
+            <p>3 790 тг</p>
+            <p>Изысканный теплый салат с баклажанами в кисло-сладком соусе с творожным сыром, рукколой, с добавлением болгарского перца.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJRmejxi_QhOjZqssIOmavq9NQb5dSFXoxcQ&s" alt="Асқабақ және страчателла ірімшігі қосылған салат">
+        <div class="item-info">
+            <h2>Салат с тыквой и сыром страчателла</h2>
+            <p>2 790 тг</p>
+            <p>Легкий салат с тыквой, добавлением микс салата и сыром страчателла.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/15431188/2ca2af40c3342b67492f289e289d7500/orig" alt="Сиыр еті тілімдерінен жасалған жылы салат">
+        <div class="item-info">
+            <h2>Теплый салат с говяжьей вырезкой</h2>
+            <p>3 990 тг</p>
+            <p>Тёплый салат с говяжьей вырезкой, свежими огурцами, помидорами черри, авокадо и миксом зелени.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://img.povar.ru/mobile/2f/06/34/f5/salat_iz_svekli_s_tvorojnim_sirom-749157.JPG" alt="Сүзбе ірімшігі мен қызылша қосылған салат">
+        <div class="item-info">
+            <h2>Салат со свеклой и творожным сыром</h2>
+            <p>3 790 тг</p>
+            <p>Легкий салат с добавлением сыра креметто, свеклы и грейпфрута, а так же микс салата.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+     <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/1447609/8dd7c5b0cbc64f05baab980cc9d90317/orig" alt="Асшаян қосылған цезарь">
+        <div class="item-info">
+            <h2>Цезарь с креветками</h2>
+            <p>3 290 тг</p>
+            <p>Лёгкий и достаточно сытный салат с добавлением креветок, помидоров черри, салата Айсберг, перепелиного яйца и кусочков хрустящего хлеба.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/931388/7e4cba67cd5f468b85eb7941b97965ab/orig" alt="Тауық еті қосылған цезарь">
+        <div class="item-info">
+            <h2>Цезарь с курицей</h2>
+            <p>2 790 тг</p>
+            <p>Лёгкий и достаточно сытный салат с добавлением филе курицы, помидоров черри, салата Айсберг, перепелиного яйца и кусочков хрустящего хлеба.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/15143849/286fcdca747a32844a4927f7a9680a21/orig" alt="Грек салаты">
+        <div class="item-info">
+            <h2>Греческий салат</h2>
+            <p>2 790 тг</p>
+            <p>Помидор, огурцы, перец светофор, оливки, брынза, Лола росса, салатные листья и заправляется цитрусовым соусом.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/1397595/2df31c5689314653b027f0b365243f92/orig" alt="Грин салаты">
+        <div class="item-info">
+            <h2>Грин салат</h2>
+            <p>2 190 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+      <!-- СУПЫ -->
+      <div class="section" id="sup">
+    <h2>СУПЫ</h2>
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14904645/c6670d5cf4f5841eecd2b55c72c8a0de/orig" alt="Теңіз өнімдері қосылған том-ям">
+        <div class="item-info">
+            <h2>Том-ям с морепродуктами</h2>
+            <p>3 290 тг</p>
+            <p>Кисло-острый суп на основе куриного бульона с добавлением креветок, филе семги и грибов.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGFKZ4Qy33heBGc2yLP6uLv8_Gwo0uWUXbkA&s" alt="Асқабақ кремді сорпасы">
+        <div class="item-info">
+            <h2>Тыквенный крем-суп</h2>
+            <p>1 990 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://e2.edimdoma.ru/data/posts/0002/4263/24263-ed4_wide.jpg?1636721910" alt="Рамён">
+        <div class="item-info">
+            <h2>Рамён</h2>
+            <p>2 890 тг</p>
+            <p>Популярное по всему миру блюдо японской, китайской и корейской кухни с пшеничной лапшой. В его основе - насыщенный бульон, лапша и самые разные добавки: курица, яйца, овощи и зелень.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14908628/8f9ed79d3d870d2dabb48fad3831f61d/orig" alt="Борщ">
+        <div class="item-info">
+            <h2>Борщ</h2>
+            <p>2 490 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+     <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/13802765/6d3cd53d9af96317f1bb3a9ba7008f62/orig" alt="Жасымықтан жасалған сорпа">
+        <div class="item-info">
+            <h2>Суп чечевичный</h2>
+            <p>1 990 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/1381342/f45056b251bb47bebf6051c267498858/orig" alt="Үйде пісірілген кеспе сорпа">
+        <div class="item-info">
+            <h2>Суп лапша по-домашнему</h2>
+            <p>1 990 тг</p>
+            <p>Домашний куриный бульон с яичной лапшой, сочными кусочками куриного филе, вареным яйцом и поджаристым хлебом.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14440961/ba82cea7f9782ab46e166b38c48513b8/orig" alt="Үйде пісірілген тұшпара">
+        <div class="item-info">
+            <h2>Домашние пельмени</h2>
+            <p>1 990 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/15437042/e7fdf27035d6c070bc3138f8e9618394/orig" alt="Фрикаделькалар қосылған сорпа">
+        <div class="item-info">
+            <h2>Суп с фрикадельками</h2>
+            <p>2 290 тг</p>
+            <p>Блюдо на наваристом бульоне с фрикадельками с добавлением овощей.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+      <!-- ГОРЯЧИЕБЛЮДА -->
+      <div class="section" id="gorbludo">
+    <h2>ГОРЯЧИЕБЛЮДА</h2>
+     <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEHdU9gPzo793Dque884WruD07kvXMR6adNw&s" alt="Бұқтырылған сиыр қабырғалары">
+        <div class="item-info">
+            <h2>Томленые говяжьи ребра</h2>
+            <p>3 290 тг</p>
+            <p>Нежные говяжьи ребра, томленные до исступительной мягкости в ароматном соусе с добавлением микс салата и соуса BBQ.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14904645/7c0447e4e9f733b15d4beeeba509b9ea/orig" alt="Басмати күрішімен ұсынылатын көксерке филесі">
+        <div class="item-info">
+            <h2>Филе судака с рисом басмати</h2>
+            <p>3 290 тг</p>
+            <p>Превосходное и вкусное филе судака, ароматный рис басмати на гарнир с добавлением красного лука, перца светофор.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRndI9kxfs6Dn3dEX3EIlS6BGifGAKcmPt9A&s" alt="Картоп қосылған вареники">
+        <div class="item-info">
+            <h2>Вареники с картошкой</h2>
+            <p>1 790 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/15135287/2608e89622a15a4a3abae318bc9cfa53/orig" alt="Көкөністер мен күріш қосылған тәтті және қышқыл тұздықтағы тауық еті">
+        <div class="item-info">
+            <h2>Курица в кисло-сладком соусе с овощами и рисом</h2>
+            <p>3 290 тг</p>
+            <p>Курица в соусе свит чилли, на подушке из риса с луком, с кукурузой и болгарским перцем, посыпанная кунжутом и перьями зеленого лука.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14904645/1601d5bc03042cfcc51d43e18fdcf1e0/orig" alt="Кремді соус қосылған тауық еті">
+        <div class="item-info">
+            <h2>Курица в сливочном соусе</h2>
+            <p>3 290 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14904645/1601d5bc03042cfcc51d43e18fdcf1e0/orig" alt="Кремді соус қосылған сиыр еті">
+        <div class="item-info">
+            <h2>Говядина в сливочном соусе</h2>
+            <p>3 490 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://www.povarenok.ru/data/cache/2021aug/12/51/2891773_61429-710x550.jpg" alt="Тауық еті қосылған шницель">
+        <div class="item-info">
+            <h2>Шницель с курицей</h2>
+            <p>3 290 тг</p>
+            <p>Сытное горячее блюдо с добавлением свежего тартина, хрустящего куриного филе, сыра и яйца пашот.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/3809330/7a64eeb4741841fa820c4a513257f0e9/orig" alt="Терияки тауығы">
+        <div class="item-info">
+            <h2>Курица терияки</h2>
+            <p>3 290 тг</p>
+            <p>Нежное куриное филе, томленный в соусе терияки, рис с миксом зелени.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <h3>Гарниры</h3>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/13802765/4c402cce548e2356fbfc1bf27b39db22/orig" alt="Күріш">
+        <div class="item-info">
+            <h2>Рис</h2>
+            <p>990 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/15135287/f8c594739a643d5494ec48936816ce6e/orig" alt="Фри картоптары">
+        <div class="item-info">
+            <h2>Картофель фри</h2>
+            <p>1 190 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/15437042/db8376019de93335ca3eb2c32c3be500/orig" alt="Картоп езбесі">
+        <div class="item-info">
+            <h2>Пюре</h2>
+            <p>990 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+      <!-- ПАСТА -->
+      <div class="section" id="pasta">
+    <h2>ПАСТА</h2>
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14790567/fc3dcaff33651ee9def1d43ce2e8ec1d/orig" alt="Ақсерке қосылған паста">
+        <div class="item-info">
+            <h2>Паста с лососем</h2>
+            <p>3 790 тг</p>
+            <p>Изысканное блюдо итальянской кухни. Сочное филе лосося в томатном соусе с пастой фетучини, помидорами, брокколи и сыром пармезан.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14790567/fc3dcaff33651ee9def1d43ce2e8ec1d/orig" alt="Болоньез пастасы">
+        <div class="item-info">
+            <h2>Паста болоньезе</h2>
+            <p>2 790 тг</p>
+            <p>Блюдо американского происхождения на основе мясного фарша, томатного соуса, спагетти и сыр пармезан.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/3806315/194372ca977d4c14a6e602dd22c72903/orig" alt="Альфредо пастасы">
+        <div class="item-info">
+            <h2>Паста Альфредо</h2>
+            <p>3 290 тг</p>
+            <p>Изысканное блюдо итальянской кухни. Нежное куриное филе в сливочном соусе с пастой фетучини, шампиньонами и сыром пармезан.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+</div>
+    <!-- СТЕЙКИ -->
+      <div class="section" id="steyk">
+    <h2>СТЕЙКИ</h2>
+      <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn-gastHKJI8kbcj3GeLSuJkct1XnAANJxkg&s" alt="Тауық етінен жасалған стейк">
+        <div class="item-info">
+            <h2>Стейк из курицы</h2>
+            <p>3 690 тг</p>
+            <p>Нежное и аппетитное блюдо, состоящее из кусочков куриного филе с овощами в сливочном соусе.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://www.gotovim.ru/pics/fotorecs/rec8976.jpg" alt="Ақсерке қосылған стейк">
+        <div class="item-info">
+            <h2>Стейк из семги</h2>
+            <p>4 790 тг</p>
+            <p>Королевское, сочное и полезное блюдо. Авторский рецепт включает в себя, фисташки, перец чили и соус Альфредо из цветной капусты.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+</div>
+
+<div class="section" id="Sausages">
+    <h2>Шұжықтар</h2>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14835768/d1a9cffa8020dbc662a938ccf995418c/orig" alt="Сиыр етінен жасалған шұжықтар">
+        <div class="item-info">
+            <h2>Говяжи сосиски</h2>
+            <p>3 990 тг</p>
+            <p>Сытные говяжьи улитки, с картофельными дольками так же корнишоны, с миксом салата в соусе BBQ.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14835768/d1a9cffa8020dbc662a938ccf995418c/orig" alt="Тауық етінен жасалған шұжықтар">
+        <div class="item-info">
+            <h2>Куриные сосиски</h2>
+            <p>3 790 тг</p>
+            <p>Сытные куриные улитки, с картофельными дольками так же корнишоны, с миксом салата в соусе BBQ.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <!-- ФАСТФУД -->
+      <div class="section" id="fasfud">
+    <h2>ФАСТФУД</h2>
+      <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/15437042/28552b223f62beb69236c4c1d2798463/orig" alt="Круассан с семгой">
+        <div class="item-info">
+            <h2>Круассан с семгой</h2>
+            <p>2 590 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/15437042/2ae8586e13170d103a63d5ded69bc45b/orig" alt="Круассан с курицей">
+        <div class="item-info">
+            <h2>Круассан с курицей</h2>
+            <p>1 990 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14904645/b95a707dc8161b4dc821956e5ffba1ee/orig" alt="Круассан цезарь">
+        <div class="item-info">
+            <h2>Круассан цезарь</h2>
+            <p>1 990 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/12773219/14e610a5b69245c5bb405931e2796a3c/orig" alt="Тортилья с курицей">
+        <div class="item-info">
+            <h2>Тортилья с курицей</h2>
+            <p>1 690 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/12773219/14e610a5b69245c5bb405931e2796a3c/orig" alt="Тортилья с семгой">
+        <div class="item-info">
+            <h2>Тортилья с семгой</h2>
+            <p>1 990 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1e_1oMv9_-XsAmFDPg6_ewkdXr36Ih00n1w&s" alt="Панини с курицей">
+        <div class="item-info">
+            <h2>Панини с курицей</h2>
+            <p>2 590 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://cdn-kz3.foodpicasso.com/assets/2024/11/13/98a4559f6e438d4abb10298b771a3fe7---jpeg_528x260:whitepadding20_4715c_convert.jpeg" alt="Панини с куриными наггетсами">
+        <div class="item-info">
+            <h2>Панини с куриными наггетсами</h2>
+            <p>2 490 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/15135287/cc877c7dfe73ade0af57bc613e815d75/orig" alt="Ржаная чиабатта с курицей">
+        <div class="item-info">
+            <h2>Ржаная чиабатта с курицей</h2>
+            <p>2 490 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14904645/b95a707dc8161b4dc821956e5ffba1ee/orig" alt="Бокс мастер с куриными наггетсами">
+        <div class="item-info">
+            <h2>Бокс мастер с куриными наггетсами</h2>
+            <p>1 790 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://i.obozrevatel.com/food/recipemain/2019/1/10/p2103758.jpg?size=636x424" alt="Панини с индейкой">
+        <div class="item-info">
+            <h2>Панини с индейкой</h2>
+            <p>2 790 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/1397595/d0558b4c57fa486eb7c7fb5ada6e10d8/orig" alt="Клаб-сэндвич с курицей и фри">
+        <div class="item-info">
+            <h2>Клаб-сэндвич с курицей и фри</h2>
+            <p>2 790 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://strg2.restoran.kz/neofiles/serve-image/658a80ada686811ad84072b5" alt="Бургер с курицей">
+        <div class="item-info">
+            <h2>Бургер с курицей</h2>
+            <p>2 290 тг</p>
+            <p>Көкөністер, ірімшік, BBQ тұзыдығы қосылған балғын әрі дәмді сиыр етінің тілімдері.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRA1ImQ7wTiz9_z3PaWs6ZLbe8nboLSEqMa9w&s" alt="Стейк сэндвич">
+        <div class="item-info">
+            <h2>Стейк сэндвич</h2>
+            <p>2 790 тг</p>
+            <p>Көкөністер, ірімшік, BBQ тұзыдығы қосылған балғын әрі дәмді сиыр етінің тілімдері.</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <!-- Напитки -->
+      <div class="section" id="napitki">
+     <h2>Напитки</h2>
+     <div class="item">
+        <img src="https://simg.marwin.kz/media/catalog/product/cache/8d1771fdd19ec2393e47701ba45e606d/s/e/napitok_coca_cola_jb_0330lkz.jpg" alt="Coca-cola банка">
+        <div class="item-info">
+            <h2>Coca-cola банка</h2>
+            <p>690 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+
+    <div class="item">
+        <img src="https://img.oe.kz/bitrix-catalog/25843/1720305331-napitok-gazirovanniy-coca-cola-classic-0-25-l-steklyannaya-butylka-2.jpeg" alt="Coca-cola шыны">
+        <div class="item-info">
+            <h2>Coca-cola шыны/стекло</h2>
+            <p>690 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://img.oe.kz/bitrix-catalog/15440/1720298531-napitok-gazirovanniy-sprite-0-33-l-zhestyanaya-banka-2.jpeg" alt="Sprite банка">
+        <div class="item-info">
+            <h2>Sprite банка</h2>
+            <p>690 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVdminmZnM42EaE10PmqFHOpE7CvDFLIoGJA&s" alt="Sprite шыны">
+        <div class="item-info">
+            <h2>Sprite шыны/стекло</h2>
+            <p>690 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://static.insales-cdn.com/images/products/1/7486/316316990/%D0%92%D0%BE%D0%B4%D0%B0_%D0%BC%D0%B8%D0%BD%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F_%D0%BB%D0%B5%D1%87%D0%B5%D0%B1%D0%BD%D0%BE-%D1%81%D1%82%D0%BE%D0%BB%D0%BE%D0%B2%D0%B0%D1%8F_BORJOMI_%D0%B3%D0%B0%D0%B7_0_33_%D0%BB_%D0%B6.jpg" alt="Borjomi">
+        <div class="item-info">
+            <h2>Borjomi шыны/стекло 0,3/0,5</h2>
+            <p>990/1500 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://minio.clevermart.kz/food/images/2023/6/5/db77b66c-be0f-4784-b0e5-6b534e219c79/M_90370632_1.jpg" alt="Piko">
+        <div class="item-info">
+            <h2>Piko (апельсин, алма)</h2>
+            <p>450 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://api.im.kz/storage/tayyVQ2Xz9wPUHzXvaxAsVtpL0EfE2-metaRnVzZVRlYV_QnNCw0L3Qs9C+0KDQvtC80LDRiNC60LBfNTAweDUwMC5wbmc=-.png" alt="Fuse tea">
+        <div class="item-info">
+            <h2>Fuse tea</h2>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://img.oe.kz/bitrix-catalog/36650/1720311195-napitok-energeticheskiy-red-bull-0-25-l-zhestyanaya-banka-2.jpeg" alt="Red bull">
+        <div class="item-info">
+            <h2>Red bull 0,25ml</h2>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <!-- ДЕСЕРТЫ -->
+      <div class="section" id="deserti">
+    <h2>ДЕСЕРТЫ</h2>
+<div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTC4Z0FKWDelFUmDayuqdrJAULUM_bVHI06mQ&s" alt="Құмырсқа ұясы">
+        <div class="item-info">
+            <h2>Құмырсқа ұясы / Муравейник</h2>
+            <p>1490 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm03JrBuWQKesdGG4GDgmxCY4E1FcwOJKH2g&s" alt="Наполеон">
+        <div class="item-info">
+            <h2>Наполеон</h2>
+            <p>1890 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14046028/d11452e8956298f824d5d16929a9e42a/orig" alt="Бал торты">
+        <div class="item-info">
+            <h2>Бал торты / Медовик</h2>
+            <p>1890 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14046028/6243c955ffe2cab1c838922f4eeb3fbc/orig" alt="Чизкейк Qazaqsha">
+        <div class="item-info">
+            <h2>Чизкейк Qazaqsha</h2>
+            <p>2190 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14835768/a415973d1e2d0cb57736d45380996631/orig" alt="Испан чизкейгі">
+        <div class="item-info">
+            <h2>Испан чизкейгі / Испанский чизкейк</h2>
+            <p>2490 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/15143849/e8b513ae54fe7f9c29c64dba07599d1d/orig" alt="Вупи-пай">
+        <div class="item-info">
+            <h2>Вупи-пай</h2>
+            <p>1890 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14440961/d19ed31f70ab434a3d400415d68b2f25/orig" alt="Молочная девочка">
+        <div class="item-info">
+            <h2>Молочная девочка</h2>
+            <p>1890 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://tehne.com/assets/i/upload/2024/moti2.jpg" alt="Моти">
+        <div class="item-info">
+            <h2>Моти</h2>
+            <p>1390 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/15437042/9147133308a09290de44c2d42ab9410c/orig" alt="Бәліш/Пончик">
+        <div class="item-info">
+            <h2>Бәліш/Пончик</h2>
+            <p>990 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    
+    <h2>Выпечка</h2>
+    
+    <div class="item">
+        <img src="https://sun9-70.userapi.com/impf/EdQha8U_n_zlDZShslm8i6rJ0CV5gOAcOM0q6Q/f1iP83GWlLo.jpg?size=500x333&quality=96&sign=95b0342375c006f747f964c08043aec9&type=album" alt="Шоколад қосылған круассан">
+        <div class="item-info">
+            <h2>Шоколад қосылған круассан / Круассан с шоколадом</h2>
+            <p>1290 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/13802765/534308fb5b7597e4882ebb6774144d90/orig" alt="Қоюландырылған сүт қосылған круассан">
+        <div class="item-info">
+            <h2>Қоюландырылған сүт қосылған круассан / Круассан со сгущенкой</h2>
+            <p>1290 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/15382203/1944b9c827d471d39939a938e5c817d7/orig" alt="Бадам қосылған круассан">
+        <div class="item-info">
+            <h2>Бадам қосылған круассан / Круассан миндальный</h2>
+            <p>1390 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+    <div class="item">
+        <img src="https://avatars.mds.yandex.net/get-eda/14904645/43ddbab400726c5f72965050b89040b7/orig" alt="Сыр қосылған круассан">
+        <div class="item-info">
+            <h2>Сыр қосылған круассан</h2>
+            <p>1390 тг</p>
+        </div>
+        <button class="add-button">+</button>
+    </div>
+</div>
+  <script>
+  // Берілген бөлімге жұмсақ айналдыру (scrolling)
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: "smooth", block: "start" });
+
+      // Активті батырманы өзгерту
+      document.querySelectorAll(".category-btn").forEach(btn => btn.classList.remove("active"));
+      event.target.classList.add("active");
+    }
+
+    // Скролл кезінде бөлімнің атауын автоматты түрде өзгерту
+    window.addEventListener("scroll", () => {
+      let currentSection = "limonady";
+
+      document.querySelectorAll(".section").forEach(section => {
+        if (section.getBoundingClientRect().top <= 100) {
+          currentSection = section.id;
+        }
+      });
+
+      document.querySelectorAll(".category-btn").forEach(btn => {
+        btn.classList.remove("active");
+        if (btn.getAttribute("onclick").includes(currentSection)) {
+          btn.classList.add("active");
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

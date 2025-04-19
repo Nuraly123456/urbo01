@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urbo Coffee | Филиалдар</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fdfdfd;
+      color: #333;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    .branches {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: #111;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #666;
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+      }
+
+      .card h2 {
+        font-size: 1rem;
+      }
+
+      .card p {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>URBO Coffee — Қазақстан
+        <br>40+ филиал!</h1>
+  <div class="branches">
+    <div class="card">
+      <h2>Алматы</h2>
+      <p>24 филиал</p>
+    </div>
+    <div class="card">
+      <h2>Астана</h2>
+      <p>10 филиал</p>
+    </div>
+    <div class="card">
+      <h2>Тараз</h2>
+      <p>3 филиал</p>
+    </div>
+    <div class="card">
+      <h2>Шымкент</h2>
+      <p>1 филиал</p>
+    </div>
+    <div class="card">
+      <h2>Қарағанды</h2>
+      <p>1 филиал</p>
+    </div>
+    <div class="card">
+      <h2>Семей</h2>
+      <p>3 филиал</p>
+    </div>
+    <div class="card">
+      <h2>Атырау</h2>
+      <p>1 филиал</p>
+    </div>
+    <div class="card">
+      <h2>Ақтау</h2>
+      <p>3 филиал</p>
+    </div>
+  </div>
+</body>
+</html>

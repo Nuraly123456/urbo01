@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Біздің Кофе</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f3f0;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 30px;
+      font-size: 36px;
+      color: #6b4f3b;
+    }
+
+    p {
+      font-size: 18px;
+      color: #3e2f25;
+      line-height: 1.6;
+      padding: 0 15px;
+    }
+
+    .video-container {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      padding: 0 10px;
+    }
+
+    video {
+      width: 100%;
+      max-width: 720px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    /* 🔊 Дыбыс батырмасы */
+    .sound-toggle {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      background-color: #ffffffcc;
+      border: none;
+      border-radius: 50%;
+      padding: 10px;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+    }
+
+    .sound-toggle:hover {
+      background-color: #eee;
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 28px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+
+      .sound-toggle {
+        font-size: 20px;
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>URBO Coffee — қала дәмін сез!</h1>
+  <p>
+    Бұл жай ғана кофе емес, бұл — өмір салты.<br>
+    2018 жылдан бастап 40+ филиалмен Қазақстанда<br> сіздермен бірге дамып келеміз.<br>
+    Таңғы шабыт, күндізгі сергектік, <br>кешкі релакс — бәрі URBO-да.<br>
+    <strong>Сенің қалаң. Сенің кофең.<br> Бұл — біздің URBO! ☕✨</strong>
+  </p>
+
+  <div class="video-container">
+    <video id="urboVideo" autoplay loop muted playsinline>
+      <source src="urbo.mp4" type="video/mp4">
+      Сіздің браузеріңіз видеоны қолдамайды.
+    </video>
+
+    <!-- 🔊 Дыбыс басқару батырмасы -->
+    <button class="sound-toggle" id="soundToggle">🔇</button>
+  </div>
+
+  <script>
+    const video = document.getElementById("urboVideo");
+    const soundBtn = document.getElementById("soundToggle");
+
+    soundBtn.addEventListener("click", () => {
+      if (video.muted) {
+        video.muted = false;
+        video.volume = 1;
+        video.play();
+        soundBtn.textContent = "🔊";
+      } else {
+        video.muted = true;
+        soundBtn.textContent = "🔇";
+      }
+    });
+  </script>
+
+</body>
+</html>

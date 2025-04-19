@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Смотрите также</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      height: 70px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .tagline {
+      font-size: 20px;
+      font-weight: 700;
+      color: #555;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    h2 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 30px;
+      animation: slideIn 1s ease-in-out;
+    }
+
+    .heart {
+      display: inline-block;
+      color: red;
+      animation: heartbeat 2s infinite;
+    }
+
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.2); }
+      40% { transform: scale(1); }
+      60% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .menu-item {
+      text-decoration: none;
+      font-size: 17px;
+      font-weight: 500;
+      color: #333;
+      background-color: #e0e0e0;
+      padding: 15px;
+      border-radius: 10px;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .menu-item:hover {
+      background-color: #d6d6d6;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .icon {
+      margin-right: 8px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @media (max-width: 600px) {
+      .menu-item {
+        font-size: 16px;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="https://optim.tildacdn.pro/tild6330-3831-4439-b464-316233353333/-/resize/300x/-/format/webp/16.png" alt="Logo" class="logo" />
+      <div class="tagline">24/7</div>
+    </div>
+
+    <h2>OZIMIZDIN URBO <span class="heart">❤️</span></h2>
+
+    <div class="menu">
+      <a href="002 Menu.html" class="menu-item"><span class="icon">📖</span> Меню</a>
+      <a href="003 O nas.html" class="menu-item"><span class="icon">💻</span> О нас</a>
+      <a href="004 Filial.html" class="menu-item"><span class="icon">📍</span> Адреса филиалов</a>
+      <a href="005 Dastavka.html" class="menu-item"><span class="icon">🚚</span> Доставка</a>
+      <a href="006 Kiniga jalob.html" class="menu-item"><span class="icon">📸</span> Книга жалоб</a>
+      <a href="007 Vacansia.html" class="menu-item"><span class="icon">👷</span> Вакансии</a>
+    </div>
+    </div>
+    <p><strong>URBO Coffee — сенің қалаң, сенің кофең.</strong><p>
+  </div>
+</body>
+</html>
